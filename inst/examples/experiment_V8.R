@@ -75,15 +75,17 @@ ctx$get(
 '
 )
 # to set can do something ugly like this
-ctx$eval(
+ctx$get(
 '
-var return_data = {};
+(function(){
+  var return_data = {};
   mapshaper.runCommand(
-  command[0],
-  mapshaper.internal.importFileContent(poly, null, {}),
-  function(err,data){return_data = data}
-  )
-  return_data;
+    command[0],
+    mapshaper.internal.importFileContent(poly, null, {}),
+      function(err,data){return_data = data}
+    )
+  return return_data;
+})()
 '
 )
-ctx$get("return_data")
+
